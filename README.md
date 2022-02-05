@@ -10,11 +10,11 @@ esta hecho utilizando las siguientes herramientas:
 ## Comandos:
 
 Levantar el servidor:
-``` 
+```sh
 $ node index.js
 ```
 
 Levantar el servidor como servicio:
-``` 
+```sh
 $ nodemon index.js
 ```
