@@ -1,18 +1,18 @@
 //const KNEX = require('../../db/knex');
 
 // Mock database
-const BOOKS = [];
+const LOANS = [];
 
-// Return books from list of books
+// Return loans from list of loans
 function list() {
     /*
-    knex.select('*').from('books')
-        .join('conservation_statuses', 'books.conservation_status_id', '=', 'conservation_statuses.id')
-        .join('states', 'books.states_id', '=', 'states.id')
-        .where('books.is_deleted', false)
-        .then(books => {
+    knex.select('*').from('loans')
+        .join('books', 'books.id', '=', 'loans.book_id')
+        .where('loans.is_deleted', false)
+        .whereNull('loans.return_date')
+        .then(loans => {
             return JSON.stringify({
-                data: books,
+                data: loans,
                 message: 'OK'
             });
         })
@@ -24,45 +24,45 @@ function list() {
         });
     */
     return JSON.stringify({
-        data: BOOKS,
+        data: LOANS,
         message: 'OK'
     });
 }
 
-// Return a book by id from list of books
+// Return a loan by id from list of loans
 function index(id) {
     /*
-    knex.select('*').from('books')
-        .join('conservation_statuses', 'books.conservation_status_id', '=', 'conservation_statuses.id')
-        .join('states', 'books.states_id', '=', 'states.id')
-        .where('books.is_deleted', false)
-        .where('book.id', id)
-        .then(book => {
-            return JSON.stringify({
-                data: book,
-                message: 'OK'
-            });
-        })
-        .catch(error => {
-            return JSON.stringify({
-                data: null,
-                message: error
-            });
+    knex.select('*').from('loans')
+    .join('books', 'books.id', '=', 'loans.book_id')
+    .where('loans.is_deleted', false)
+    .where('loans.id', id)
+    .then(loan => {
+        return JSON.stringify({
+            data: loan,
+            message: 'OK'
         });
+    })
+    .catch(error => {
+        return JSON.stringify({
+            data: null,
+            message: error
+        });
+    });
     */
+
     return JSON.stringify({
-        data: BOOKS[id],
+        data: LOANS[id],
         message: 'OK'
     });
 }
 
-// Add a new book in a list of books
-function save(book) {
+// Add a new loan in a list of loans
+function save(loan) {
     /*
-    knex('books').insert(book)
+    knex('loans').insert(loan)
         .then(() => {
             return JSON.stringify({
-                data: book,
+                data: loan,
                 message: 'OK'
             });
         })
@@ -73,20 +73,20 @@ function save(book) {
             });
         });
     */
-    BOOKS.push(book);
+    LOANS.push(loan);
     return JSON.stringify({
-        data: book,
+        data: loan,
         message: 'OK'
     });
 }
 
-// Update a book from list of books
-function edit(id, book) {
+// Update a loan from list of loans
+function edit(id, loan) {
     /*
-    knex('books').where('id', id).update(book)
+    knex('loans').where('id', id).update(loan)
         .then(() => {
             return JSON.stringify({
-                data: book,
+                data: loan,
                 message: 'OK'
             });
         })
@@ -97,18 +97,21 @@ function edit(id, book) {
             });
         });
     */
-   BOOKS[id] = book;
-   return JSON.stringify({
-        data: book,
+    LOANS[id] = loan;
+    return JSON.stringify({
+        data: loan,
         message: 'OK'
     });
 }
 
-// Delete a book from list of books
+// Delete a loan from list of loans
 function remove(id) {
     /*
-    knex('books').where('id', id)
-        .update({is_deleted: true})
+     knex('loans').where('id', id)
+        .update({
+            return_date: '2022/02/05',
+            is_deleted: true
+        })
         .then(() => {
             return JSON.stringify({
                 data: null,
@@ -122,7 +125,7 @@ function remove(id) {
             });
         });
     */
-    BOOKS[id] = {};
+    LOANS[id] = {};
     return JSON.stringify({
         data: null,
         message: 'OK'

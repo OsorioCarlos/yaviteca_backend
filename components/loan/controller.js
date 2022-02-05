@@ -1,14 +1,14 @@
 const STORE = require('./store');
 
-// Get all books
-function getBooks(){
+// Get all loans
+function getLoans(){
     return new Promise((resolve, reject) => {
         resolve(STORE.list());
     }); 
 }
 
-// Get a book by specific ID
-function getBookById(id){
+// Get a loan by specific ID
+function getLoanById(id){
     return new Promise((resolve, reject) => {
         if (!id) {
             return reject(
@@ -23,24 +23,24 @@ function getBookById(id){
     }); 
 }
 
-// Save a new book
-function addBook(book){
+// Save a new loan
+function addLoan(loan){
     return new Promise((resolve, reject) => {
-        if (!book) {
+        if (!loan) {
             return reject(
                 JSON.stringify({
                     data: null,
-                    message: '[Error]: The book is undefined'
+                    message: '[Error]: The loan is undefined'
                 })
             );
         }
         
-        resolve(STORE.save(book));
+        resolve(STORE.save(loan));
     }); 
 }
 
-// Edit a specific book by ID
-function updateBook(id, book){
+// Edit a specific loan by ID
+function updateLoan(id, loan){
     return new Promise((resolve, reject) => {
         if (!id) {
             return reject(
@@ -51,21 +51,21 @@ function updateBook(id, book){
             );
         }
 
-        if (!book) {
+        if (!loan) {
             return reject(
                 JSON.stringify({
                     data: null,
-                    message: '[Error]: The book is undefined'
+                    message: '[Error]: The loan is undefined'
                 })
             );
         }
 
-        resolve(STORE.edit(id, book));
+        resolve(STORE.edit(id, loan));
     }); 
 }
 
-// Delete a specific book by id
-function deleteBook(id){
+// Delete a specific loan by id
+function deleteLoan(id){
     return new Promise((resolve, reject) => {
         if (!id) {
             return reject(
@@ -81,9 +81,9 @@ function deleteBook(id){
 }
 
 module.exports = {
-    getBooks,
-    getBookById,
-    addBook,
-    updateBook,
-    deleteBook
+    getLoans,
+    getLoanById,
+    addLoan,
+    updateLoan,
+    deleteLoan
 }

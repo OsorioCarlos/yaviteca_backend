@@ -2,9 +2,9 @@ const EXPRESS = require('express');
 const CONTROLLER = require('./controller');
 const ROUTER = EXPRESS.Router();
 
-// GET books
+// GET loans
 ROUTER.get('/', function(req, res) {
-    CONTROLLER.getBooks()
+    CONTROLLER.getLoans()
     .then(data => {
         res.status(200).send(data);
     })
@@ -13,9 +13,9 @@ ROUTER.get('/', function(req, res) {
     });
 });
 
-// GET book
+// GET loan
 ROUTER.get('/:id', function(req, res) {
-    CONTROLLER.getBookById(req.params.id)
+    CONTROLLER.getLoanById(req.params.id)
     .then(data => {
         res.status(200).send(data);
     })
@@ -24,9 +24,9 @@ ROUTER.get('/:id', function(req, res) {
     });
 });
 
-// POST book
+// POST loan
 ROUTER.post('/', function(req, res) {
-    CONTROLLER.addBook(req.body.book)
+    CONTROLLER.addLoan(req.body.loan)
     .then(data => {
         res.status(201).send(data);
     })
@@ -35,9 +35,9 @@ ROUTER.post('/', function(req, res) {
     });
 });
 
-// PUT book
+// PUT loan
 ROUTER.put('/:id', function(req, res) {
-    CONTROLLER.updateBook(req.params.id, req.body.book)
+    CONTROLLER.updateLoan(req.params.id, req.body.loan)
     .then(data => {
         res.status(201).send(data);
     })
@@ -46,9 +46,9 @@ ROUTER.put('/:id', function(req, res) {
     });
 });
 
-// DELETE book
+// DELETE loan
 ROUTER.delete('/:id', function(req, res) {
-    CONTROLLER.deleteBook(req.params.id)
+    CONTROLLER.deleteLoan(req.params.id)
     .then(data => {
         res.status(201).send(data);
     })
@@ -56,5 +56,12 @@ ROUTER.delete('/:id', function(req, res) {
         res.status(400).send(error);
     });
 });
+
+/* 
+app.get('/registro-entrada/:desde', getBook.getRegistrosEntrada);
+app.get('/registro-existente/:desde', getBook.getRegistrosExistentes);
+
+app.put('/alquilar-libro/:id', putBook.alquilarLibro);
+*/
 
 module.exports = ROUTER;
