@@ -15,7 +15,6 @@ exports.up = function(knex) {
         table.string('name', 200).notNullable();
         table.string('editorial', 200).notNullable();
         table.string('author', 200).notNullable();
-        table.date('publication_date').notNullable();
         table.string('genre', 100).notNullable();
         table.integer('conservation_status_id').notNullable();
         table.integer('state_id').notNullable();

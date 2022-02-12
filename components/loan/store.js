@@ -1,38 +1,29 @@
-//const KNEX = require('../../db/knex');
-
-// Mock database
-const LOANS = [];
+const KNEX = require('../../db/knex');
 
 // Return loans from list of loans
 function list() {
-    /*
-    knex.select('*').from('loans')
-        .join('books', 'books.id', '=', 'loans.book_id')
-        .where('loans.is_deleted', false)
-        .whereNull('loans.return_date')
-        .then(loans => {
-            return JSON.stringify({
-                data: loans,
-                message: 'OK'
-            });
-        })
-        .catch(error => {
-            return JSON.stringify({
-                data: null,
-                message: error
-            });
+
+    KNEX.select('*').from('loans')
+    .join('books', 'books.id', '=', 'loans.book_id')
+    .where('loans.is_deleted', false)
+    .whereNull('loans.return_date')
+    .then(loans => {
+        return JSON.stringify({
+            data: loans,
+            message: 'OK'
         });
-    */
-    return JSON.stringify({
-        data: LOANS,
-        message: 'OK'
-    });
+    })
+    .catch(error => {
+        return JSON.stringify({
+            data: null,
+            message: error
+        });
+    })
 }
 
 // Return a loan by id from list of loans
 function index(id) {
-    /*
-    knex.select('*').from('loans')
+    KNEX.select('*').from('loans')
     .join('books', 'books.id', '=', 'loans.book_id')
     .where('loans.is_deleted', false)
     .where('loans.id', id)
@@ -48,87 +39,60 @@ function index(id) {
             message: error
         });
     });
-    */
-
-    return JSON.stringify({
-        data: LOANS[id],
-        message: 'OK'
-    });
 }
 
 // Add a new loan in a list of loans
 function save(loan) {
-    /*
-    knex('loans').insert(loan)
-        .then(() => {
-            return JSON.stringify({
-                data: loan,
-                message: 'OK'
-            });
-        })
-        .catch(error => {
-            return JSON.stringify({
-                data: null,
-                message: error
-            });
+    KNEX('loans').insert(loan)
+    .then(() => {
+        return JSON.stringify({
+            data: loan,
+            message: 'OK'
         });
-    */
-    LOANS.push(loan);
-    return JSON.stringify({
-        data: loan,
-        message: 'OK'
+    })
+    .catch(error => {
+        return JSON.stringify({
+            data: null,
+            message: error
+        });
     });
 }
 
 // Update a loan from list of loans
 function edit(id, loan) {
-    /*
-    knex('loans').where('id', id).update(loan)
-        .then(() => {
-            return JSON.stringify({
-                data: loan,
-                message: 'OK'
-            });
-        })
-        .catch(error => {
-            return JSON.stringify({
-                data: null,
-                message: error
-            });
+    KNEX('loans').where('id', id).update(loan)
+    .then(() => {
+        return JSON.stringify({
+            data: loan,
+            message: 'OK'
         });
-    */
-    LOANS[id] = loan;
-    return JSON.stringify({
-        data: loan,
-        message: 'OK'
+    })
+    .catch(error => {
+        return JSON.stringify({
+            data: null,
+            message: error
+        });
     });
 }
 
 // Delete a loan from list of loans
 function remove(id) {
-    /*
-     knex('loans').where('id', id)
-        .update({
-            return_date: '2022/02/05',
-            is_deleted: true
-        })
-        .then(() => {
-            return JSON.stringify({
-                data: null,
-                message: 'OK'
-            });
-        })
-        .catch(error => {
-            return JSON.stringify({
-                data: null,
-                message: error
-            });
+    KNEX('loans').where('id', id)
+    .update({
+        return_date: new Date(),
+        is_deleted: true
+    })
+    .then(() => {
+        return JSON.stringify({
+            data: null,
+            message: 'OK'
         });
-    */
-    LOANS[id] = {};
-    return JSON.stringify({
-        data: null,
-        message: 'OK'
+    })
+    .catch(error => {
+        return JSON.stringify({
+            data: null,
+            message: error
+        });
     });
 }
 
